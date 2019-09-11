@@ -51,9 +51,8 @@ tooling pages for instructions on how to enable it.
 
 You should have login access to the following services.
 ```
-1. https://github.com/esqimo
+1. https://github.com/xencon
 2. https://console.cloud.google.com
-3. https://esqim0.atlassian.net
 ```
 
 ### Test Execution
