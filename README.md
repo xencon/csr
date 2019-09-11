@@ -10,6 +10,23 @@ application platform and mobile application.
 Please refer to the [Critical Systems Reconciliation](https://docs.google.com/spreadsheets/d/1gzs2w-LGdzIi3_5Svzx3V4TMrq8kxnsLZLl0c8VeA1A/edit?ts=5d66d0b1#gid=0) spreadsheet
 for a complete list of the systems and test descriptions.
 
+### Approach
+Test coverage is the main priority of any CSR effort. Once the api has been
+studied and the appropriate tool or tools have been selected the test cases
+can be written. They should be coded in an atomised way so that they can be  
+exported with minimal refactoring to another test runner and executed as  
+part of a CI/CD process.
+
+### Desgin goals
+The test runner should be achieve the following design goals.
+```
+1. Execute a single unit test against a given system api.
+2. Execute a suite of unit tests for a given system api.
+4. Execute tests in parallel.
+5. Exercise api's from both inside and outside of the cluster.
+6. Produce machine-readable output for further processing.
+```
+
 ### Prerequisites
 Ensure you have access to the Google Cloud Platform and kubectl access to the
 Google Kubernetes Engine.
@@ -190,21 +207,4 @@ Real world examples take the following form. The output is colorised for usabili
 # IST001 | PROMETHEUS_VERSION | [EXPECTED] docker.io/prom/prometheus:v2.8.0 [RESULT] docker.io/prom/prometheus:v2.8.0 [PASS]
 # IST001 | QUAY_VERSION | [EXPECTED] quay.io/kiali/kiali:v0.20 [RESULT] quay.io/kiali/kiali:v0.20 [PASS]
 # IST001 | SIDECAR_VERSION | [EXPECTED] docker.io/istio/sidecar_injector:1.2.4 [RESULT] docker.io/istio/sidecar_injector:1.2.2 [FAIL]
-```
-
-### Approach
-Test coverage is the main priority of any CSR effort. Once the api has been
-studied and the appropriate tool or tools have been selected the test cases
-can be written. They should be coded in an atomised way so that they can be 
-exported with minimal refactoring to another test runner and executed as 
-part of a CI/CD process.
-
-### Desgin goals
-The test runner should be achieve the following design goals.
-```
-1. Execute a single unit test against a given system api.
-2. Execute a suite of unit tests for a given system api.
-4. Execute tests in parallel.
-5. Exercise api's from both inside and outside of the cluster.
-6. Produce machine-readable output for further processing.
 ```
