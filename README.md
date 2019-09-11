@@ -82,15 +82,15 @@ Executes systems and unit tests for critical system reconciliation.
 
 Examples:
   # Execute all unit tests for the gcp system.
-  csr-runner -e cld -s gcp -u all
+  csr-runner -e dev -s gcp -u all
 
   # Execute the cluster_name unit test for the gcp system.
-  csr-runner -e cld -s gcp -u cluster_name
+  csr-runner -e dev -s gcp -u cluster_name
 
 Flags:
-  -e target environment e.g. [cld]
+  -e target environment e.g. [dev]
   -s target system e.g. [gcp] or [ist]
-  -u target test e.g. [project_id] or [cluster_name etc] 
+  -u target test e.g. [project_id] or [cluster_name] etc...
 
 Usage:
   csr-runner [flags] [args]
