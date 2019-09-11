@@ -14,7 +14,7 @@ for a complete list of the systems and test descriptions.
 Test coverage is the main priority of any CSR effort. Once the api has been
 studied and the appropriate tool or tools have been selected the test cases
 can be written. They should be coded in an atomised way so that they can be  
-exported with minimal refactoring to another test runner and executed as  
+exported with minimal refactoring to another test runner and executed as 
 part of a CI/CD process.
 
 ### Desgin goals
