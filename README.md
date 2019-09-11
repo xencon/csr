@@ -22,13 +22,11 @@ Make sure your environment is configured for the project and cluster you are tes
 ```
 ]$ gcloud config configurations list 
 NAME           IS_ACTIVE  ACCOUNT             PROJECT        DEFAULT_ZONE  DEFAULT_REGION
-default        False      sbadakhc@gmail.com
-esqimo-cld     True       sbadakhc@gmail.com  esqimo-cld
-esqimo-dev     False      sbadakhc@gmail.com  esqimo-dev
-esqimo-prd-00  False      sbadakhc@gmail.com  esqimo-prd-00
+default        False      user@gmail.com
+dev            True       user@gmail.com      dev
+prd            False      user@gmail.com      prd
 
 ]$ kubectx
-cld
 dev
 prd
 ```
