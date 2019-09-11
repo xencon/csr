@@ -1,0 +1,49 @@
+#!/bin/bash
+
+source profile
+
+read -d '' USAGE << 'EOF'
+[CSR-RUNNER]
+
+Executes systems and unit tests for critical system reconciliation.
+
+Examples:
+  # Execute all unit tests for the gcp system.
+  csr-runner -e cld -s gcp -u all
+
+  # Execute the cluster_name unit test for the gcp system.
+  csr-runner -e cld -s gcp -u cluster_name
+
+Flags:
+  -e target environment e.g. [cld]
+  -s target system e.g. [gcp] or [ist]
+  -u target test e.g. [project_id] or [cluster_name etc] 
+
+Usage:
+  csr-runner [flags] [args]
+EOF
+
+if [[ $# < 6 ]]; then echo "${USAGE}"; fi
+while getopts ":e:s:u" args
+do
+  case $args in
+    e)  
+      e=$2
+      ;;
+    s)
+      s=$4
+      ;;
+    u)
+      u=$6
+      ;;
+  esac
+done
+
+if [[ ! -z $e ]] && \
+   [[ ! -z $s ]] && \
+   [[ ! -z $u ]]; then 
+  echo -e "${M}#${N} Executing test in environment ${G}$e${N} for system ${B}$s${N} unit ${B}$u${N} test:\n" ; ${PWD}/$e/$s/unit/tests $u
+  exit
+fi
+
+shift $(($OPTIND -1))

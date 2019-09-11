@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+
+all() {
+project_id
+cluster_name
+initial_cluster_version
+current_master_version
+current_node_version
+current_node_count
+max_pods_per_node
+endpoint
+location
+private_cluster
+autoscaling
+private_network
+preemtible
+database_name
+database_version
+failover_replica
+availability_type
+backup_configuration
+data_disk_size_gb
+data_disk_type
+pricing_plan
+replication_type
+settings_version
+storage_auto_resize
+storage_auto_resize_limit
+}
+
+project_id() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | PROJECT_ID |"
+  ACTUAL="$(gcloud config list --format "value(core.project)")"
+  TEST="${EXPECTED} ${PROJECT_ID} ${RESULT} ${ACTUAL}" 
+  if [[ ${PROJECT_ID} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}                                                                                                
+
+cluster_name() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | CLUSTER_NAME |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(name)")"
+  TEST="${EXPECTED} ${CLUSTER_NAME} ${RESULT} ${ACTUAL}" 
+  if [[ ${CLUSTER_NAME} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+initial_cluster_version() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP025 | INITIAL_CLUSTER_VERSION |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(initialClusterVersion)")"
+  TEST="${EXPECTED} ${INITIAL_CLUSTER_VERSION} ${RESULT} ${ACTUAL}" 
+  if [[ ${INITIAL_CLUSTER_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+current_master_version() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | CURRENT_MASTER_VERSION |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(currentMasterVersion)")"
+  TEST="${EXPECTED} ${CURRENT_MASTER_VERSION} ${RESULT} ${ACTUAL}" 
+  if [[ ${CURRENT_MASTER_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+current_node_version() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | CURRENT_NODE_VERSION |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(currentNodeVersion)")"
+  TEST="${EXPECTED} ${CURRENT_NODE_VERSION} ${RESULT} ${ACTUAL}" 
+  if [[ ${CURRENT_NODE_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+current_node_count() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | CURRENT_NODE_VERSION |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(currentNodeCount)")"
+  TEST="${EXPECTED} ${CURRENT_NODE_COUNT} ${RESULT} ${ACTUAL}" 
+  if [[ ${CURRENT_NODE_COUNT} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+max_pods_per_node() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | MAX_PODS_PER_NODE |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(defaultMaxPodsConstraint.maxPodsPerNode)")"
+  TEST="${EXPECTED} ${MAX_PODS_PER_NODE} ${RESULT} ${ACTUAL}" 
+  if [[ ${MAX_PODS_PER_NODE} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+endpoint() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | ENDPOINT |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(endpoint)")"
+  TEST="${EXPECTED} ${ENDPOINT} ${RESULT} ${ACTUAL}" 
+  if [[ ${ENDPOINT} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+location() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | LOCATION |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(location)")"
+  TEST="${EXPECTED} ${LOCATION} ${RESULT} ${ACTUAL}"         
+  if [[ ${LOCATION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+private_cluster() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP026 | PRIVATE_CLUSTER |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(privateClusterConfig.enablePrivateNodes)")"
+  TEST="${EXPECTED} ${PRIVATE_CLUSTER} ${RESULT} ${ACTUAL}" 
+  if [[ ${PRIVATE_CLUSTER} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+autoscaling() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP028 | AUTOSCALING |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(nodePools.autoscaling.enabled)")"
+  TEST="${EXPECTED} ${AUTOSCALING} ${RESULT} ${ACTUAL}" 
+  if [[ ${AUTOSCALING} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+private_network() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP029 | PRIVATE_NETWORK |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(description)")"
+  TEST="${EXPECTED} ${PRIVATE_NETWORK} ${RESULT} ${ACTUAL}" 
+  if [[ ${PRIVATE_NETWORK} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+preemtible() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP033 | PREEMTIBLE |"
+  ACTUAL="$(gcloud container clusters describe ${CLUSTER_NAME} ${REGION} --format="get(nodeConfig.preemptible)")"
+  TEST="${EXPECTED} ${PREEMTIBLE} ${RESULT} ${ACTUAL}" 
+  if [[ ${PREEMTIBLE} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+database_name() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | DATABASE_NAME |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(name)")"
+  TEST="${EXPECTED} ${DATABASE_NAME} ${RESULT} ${ACTUAL}" 
+  if [[ ${DATABASE_NAME} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+database_version() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | DATABASE_VERSION |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(databaseVersion)")"
+  TEST="${EXPECTED} ${DATABASE_VERSION} ${RESULT} ${ACTUAL}" 
+  if [[ ${DATABASE_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+failover_replica() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | FAILOVER_REPLICA |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(failoverReplica.available)")"
+  TEST="${EXPECTED} ${FAILOVER_REPLICA} ${RESULT} ${ACTUAL}" 
+  if [[ ${FAILOVER_REPLICA} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+availability_type() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP035 | AVAILABILITY_TYPE |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.availabilityType)")"
+  TEST="${EXPECTED} ${AVAILABILITY_TYPE} ${RESULT} ${ACTUAL}" 
+  if [[ ${AVAILABILITY_TYPE} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+backup_configuration() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP036 | BACKUP_CONFIGURATION |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.backupConfiguration.enabled)")"
+  TEST="${EXPECTED} ${BACKUP_CONFIGURATION} ${RESULT} ${ACTUAL}"
+  if [[ ${BACKUP_CONFIGURATION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+data_disk_size_gb() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | DATA_DISK_SIZE_GB |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.dataDiskSizeGb)")"
+  TEST="${EXPECTED} ${DATA_DISK_SIZE_GB} ${RESULT} ${ACTUAL}" 
+  if [[ ${DATA_DISK_SIZE_GB} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+data_disk_type() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | DATA_DISK_TYPE | "
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.dataDiskType)")"
+  TEST="${EXPECTED} ${DATA_DISK_TYPE} ${RESULT} ${ACTUAL}" 
+  if [[ ${DATA_DISK_TYPE} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+pricing_plan() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | PRICING_PLAN |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.pricingPlan)")"
+  TEST="${EXPECTED} ${PRICING_PLAN} ${RESULT} ${ACTUAL}" 
+  if [[ ${PRICING_PLAN} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+replication_type() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | REPLICATION_TYPE | "
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.replicationType)")"
+  TEST="${EXPECTED} ${REPLICATION_TYPE} ${RESULT} ${ACTUAL}" 
+  if [[ ${REPLICATION_TYPE} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+settings_version() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | SETTINGS_VERSION | "
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.settingsVersion)")"
+  TEST="${EXPECTED} ${SETTINGS_VERSION} ${RESULT} ${ACTUAL}" 
+  if [[ ${SETTINGS_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+storage_auto_resize() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | STORAGE_AUTO_RESIZE |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.storageAutoResize)")"
+  TEST="${EXPECTED} ${STORAGE_AUTO_RESIZE} ${RESULT} ${ACTUAL}" 
+  if [[ ${STORAGE_AUTO_RESIZE} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+storage_auto_resize_limit() {
+  source ${PWD}/profile && source ${PWD}/cld/gcp/assert.vars
+  BOILER="${M}#${N} GCP000 | STORAGE_AUTO_RESIZE_LIMIT |"
+  ACTUAL="$(gcloud sql instances describe ${DATABASE_NAME} --format="get(settings.storageAutoResizeLimit)")"
+  TEST="${EXPECTED} ${STORAGE_AUTO_RESIZE_LIMIT} ${RESULT} ${ACTUAL}" 
+  if [[ ${STORAGE_AUTO_RESIZE_LIMIT} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+UNIT_TEST=$1; shift; $UNIT_TEST "$@"

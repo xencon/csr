@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+all() {
+all_in_one_version
+citadel_version
+egress_version
+galley_version
+grafana_version
+ingress_version
+mixer_version
+node_agent_version
+pilot_version
+prometheus_version
+quay_version
+sidecar_version
+}
+
+all_in_one_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | CITADEL_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "all-in-one")"
+  TEST="${EXPECTED} ${ALL_IN_ONE_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${ALL_IN_ONE_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+citadel_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | CITADEL_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "citadel")"
+  TEST="${EXPECTED} ${CITADEL_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${CITADEL_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+egress_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | EGRESS_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep -m1 "proxyv2")"
+  TEST="${EXPECTED} ${EGRESS_VERSION} ${RESULT} ${ACTUAL}"
+  for a in ACTUAL
+    do
+      if [[ ${EGRESS_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+  done
+}
+
+galley_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | GALLEY_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "galley")"
+  TEST="${EXPECTED} ${GALLEY_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${GALLEY_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+grafana_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | GRAFANA_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "grafana")"
+  TEST="${EXPECTED} ${GRAFANA_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${GRAFANA_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+ingress_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | INGRESS_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep -m1 "proxyv2")"
+  TEST="${EXPECTED} ${INGRESS_VERSION} ${RESULT} ${ACTUAL}"
+  for a in ACTUAL
+    do
+      if [[ ${INGRESS_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+  done
+}
+
+mixer_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | MIXER_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "mixer")"
+  TEST="${EXPECTED} ${MIXER_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${MIXER_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+node_agent_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | NODE_AGENT_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "node-agent")"
+  TEST="${EXPECTED} ${NODE_AGENT_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${NODE_AGENT_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+pilot_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | PILOT_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "pilot")"
+  TEST="${EXPECTED} ${PILOT_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${PILOT_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+prometheus_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | PROMETHEUS_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "prometheus")"
+  TEST="${EXPECTED} ${PROMETHEUS_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${PROMETHEUS_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+quay_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | QUAY_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "quay")"
+  TEST="${EXPECTED} ${QUAY_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${QUAY_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+sidecar_version() {
+  source ${PWD}/profile && source ${PWD}/cld/ist/assert.vars
+  BOILER="${M}#${N} IST001 | SIDECAR_VERSION |"
+  ACTUAL="$(kubectl get pods -n istio-system -o jsonpath="{.items[*].spec.containers[*].image}" |tr -s '[[:space:]]' '\n' |sort |uniq | grep "sidecar_injector")"
+  TEST="${EXPECTED} ${SIDECAR_VERSION} ${RESULT} ${ACTUAL}"
+  if [[ ${SIDECAR_VERSION} == "${ACTUAL}" ]]; then echo "${BOILER} ${TEST} ${PASS}" ; else echo "${BOILER} ${TEST} ${FAIL}" ; fi
+}
+
+UNIT_TEST=$1; shift; $UNIT_TEST "$@"
