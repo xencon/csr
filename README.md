@@ -120,7 +120,7 @@ tests and how they exercise the relevant api.
 
 ### Assertions
 
-Refer to the CSR spreadsheet and identify a test and update the
+Refer to the CSR spreadsheet, identify a test and update the
 `assert.vars` file for your system with the asserted value.
 ```
 # Expected values  
