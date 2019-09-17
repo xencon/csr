@@ -7,9 +7,6 @@ contains unit tests for the components which assemble these critical systems
 and which together make up a complete deployment of the cloud infrastructure, 
 application platform and mobile application. 
 
-Please refer to the [Critical Systems Reconciliation](https://docs.google.com/spreadsheets/d/1gzs2w-LGdzIi3_5Svzx3V4TMrq8kxnsLZLl0c8VeA1A/edit?ts=5d66d0b1#gid=0) spreadsheet
-for a complete list of the systems and test descriptions.
-
 ### Approach
 Test coverage is the main priority of any CSR effort. Once the api has been
 studied and the appropriate tool or tools have been selected the test cases
@@ -46,11 +43,6 @@ prd            False      user@gmail.com      prd
 ]$ kubectx
 dev
 prd
-```
-
-Some test may require an ssh tunnel be setup to access the appropriate cluster.
-```
-ssh -Nf {BASTION_HOST}
 ```
 
 ### Tooling
@@ -101,7 +93,7 @@ The unit tests are simple functions in the tests file under the unit folder for
 the relevant system. Check README.md for your system for details about the 
 tests and how they exercise the relevant api.
 ```
-├── cld				
+├── dev			
 │   ├── gcp
 │   │   ├── assert.vars
 │   │   ├── README.md
@@ -120,8 +112,8 @@ tests and how they exercise the relevant api.
 
 ### Assertions
 
-Refer to the CSR spreadsheet, identify a test and update the
-`assert.vars` file for your system with the asserted value.
+Refer to the CSR spreadsheet, identify a test and update the `assert.vars` 
+file for your system with the asserted value.
 ```
 # Expected values  
 
@@ -130,7 +122,7 @@ REGION="--region=europe-west2"
 PROJECT_ID="esqimo-cld"
 
 # GKE CONFIGURATION
-CLUSTER_NAME="env01cls01"
+CLUSTER_NAME="dev01cls01"
 CLUSTER_VERSION="1.13.7-gke.8"
 PRIVATE_CLUSTER="True"
 AUTOSCALING="True"
@@ -138,7 +130,7 @@ PRIVATE_NETWORK="A regional GKE cluster on a private network"
 PREEMTIBLE="True"
 
 # AUTH DATABASE
-DATABASE_NAME="env01dbs01-7c5390be"
+DATABASE_NAME="dev01dbs01"
 DATABASE_VERSION="POSTGRES_9_6"
 FAILOVER_REPLICA="True"
 AVAILABILITY_TYPE="REGIONAL"
@@ -192,8 +184,8 @@ audit compliance.
 
 Real world examples take the following form. The output is colorised for usability.
 ```
-]$ ./csr-runner -e cld -s ist -u all
-# Executing test in environment cld for system ist unit all test:
+]$ ./csr-runner -e dev -s ist -u all
+# Executing test in environment dev for system ist unit all test:
 
 # IST001 | CITADEL_VERSION | [EXPECTED] docker.io/jaegertracing/all-in-one:1.9 [RESULT] docker.io/jaegertracing/all-in-one:1.9 [PASS]
 # IST001 | CITADEL_VERSION | [EXPECTED] docker.io/istio/citadel:1.2.4 [RESULT] docker.io/istio/citadel:1.2.2 [FAIL]
