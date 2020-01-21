@@ -15,7 +15,7 @@ exported with minimal refactoring to another test runner and executed as
 part of a CI/CD process.
 
 ### Desgin goals
-The test runner should be achieve the following design goals.
+The test runner should adhere to the following design goals.
 ```
 1. Execute a single unit test against a given system api.
 2. Execute a suite of unit tests for a given system api.
