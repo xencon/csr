@@ -7,6 +7,8 @@ contains unit tests for the components which assemble these critical systems
 and which together make up a complete deployment of the cloud infrastructure, 
 application platform and mobile application. 
 
+![](images/csr.png)
+
 ### Approach
 Test coverage is the main priority of any CSR effort. Once the api has been
 studied and the appropriate tool or tools have been selected the test cases

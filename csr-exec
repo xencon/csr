@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s auth-db -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s auth-svc -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s customer-db -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s customer-svc -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s exchange-db -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s exchange-quoting-coinbase-svc -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s exchange-svc -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s external-dns -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s gcp -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s istio-system -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s kube-config -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s kube-system -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s ledger-db -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s ledger-svc -u all; exec bash\""
+gnome-terminal -e "bash -c \"./csr-runner -e prd -s logging -u all; exec bash\""
+
