@@ -1,11 +1,11 @@
 # Critical Systems Reconciliation
 
 The puposes of CSR is to provide reconcilistion of the systems runtime 
-configuration and associated technology assests. This is tested against an
-agreed specification and known state of the system in question. This repository 
+configuration and associated resources. This is tested against an agreed
+specification and known state of the system in question. This repository 
 contains unit tests for the components which assemble these critical systems 
 and which together make up a complete deployment of the cloud infrastructure, 
-application platform and mobile application. 
+application platform and application. 
 
 ![](images/csr.png)
 
