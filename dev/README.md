@@ -5,15 +5,11 @@ associated with a critical system.
 
 ### Prerequisites
 A description of the systems folders taken from Critical Systems Inventory.
-Not all the systems will be necessarily represented here.
+In this example the following systems are represented here.
 ```
-├── bof - Backoffice
-├── cbp - Core Banking Plaftorm
-├── clf - Cloudfare
 ├── gcp - Google Cloud Platform
-├── git - Source Control
 ├── ist - Istio Application Platform
-├── mob - Mobile Application
+├── app - Application
 └── web - Website
 ```
 
