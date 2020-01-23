@@ -1,7 +1,6 @@
 # Istio Application Platform
 
-Unit tests for the istio applicatiom platform.
+Unit tests for Istio service mesh.
 
-These tests call the kubectl api and traverse the jsonpath for the value of the
-configuration item. That value is tested against the corresponding value in the
-asserts.var file.
+These tests call the Istio api. The retrived value is tested against 
+the corresponding value in the asserts.var file.
