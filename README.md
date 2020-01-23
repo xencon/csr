@@ -119,7 +119,7 @@ file for your system with the asserted value.
 
 # GCP CONFIGURATION
 REGION="--region=europe-west2"
-PROJECT_ID="esqimo-cld"
+PROJECT_ID="acme-dev"
 
 # GKE CONFIGURATION
 CLUSTER_NAME="dev01cls01"
