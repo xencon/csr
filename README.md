@@ -40,6 +40,7 @@ Make sure your environment is configured for the project and cluster you are tes
 NAME           IS_ACTIVE  ACCOUNT             PROJECT        DEFAULT_ZONE  DEFAULT_REGION
 default        False      user@gmail.com
 dev            True       user@gmail.com      dev
+uat            False      user@gmail.com      uat
 prd            False      user@gmail.com      prd
 
 ]$ kubectx
@@ -121,10 +122,10 @@ file for your system with the asserted value.
 
 # GCP CONFIGURATION
 REGION="--region=europe-west2"
-PROJECT_ID="acme-dev"
+PROJECT_ID="my-project-id"
 
 # GKE CONFIGURATION
-CLUSTER_NAME="dev01cls01"
+CLUSTER_NAME="my-cluster"
 CLUSTER_VERSION="1.13.7-gke.8"
 PRIVATE_CLUSTER="True"
 AUTOSCALING="True"
@@ -132,7 +133,7 @@ PRIVATE_NETWORK="A regional GKE cluster on a private network"
 PREEMTIBLE="True"
 
 # AUTH DATABASE
-DATABASE_NAME="dev01dbs01"
+DATABASE_NAME="my-database"
 DATABASE_VERSION="POSTGRES_9_6"
 FAILOVER_REPLICA="True"
 AVAILABILITY_TYPE="REGIONAL"
