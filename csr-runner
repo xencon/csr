@@ -9,10 +9,10 @@ Executes systems and unit tests for critical system reconciliation.
 
 Examples:
   # Execute all unit tests for the gcp system.
-  csr-runner -e prd -s gcp -u all
+  csr-runner -e dev -s gcp -u all
 
   # Execute the cluster_name unit test for the gcp system.
-  csr-runner -e prd -s gcp -u cluster_name
+  csr-runner -e dev -s gcp -u cluster_name
 
 Flags:
   -e target environment
