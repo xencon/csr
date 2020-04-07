@@ -2,7 +2,7 @@
 
 source profile
 
-read -d '' USAGE << 'EOF'
+read -rd '' USAGE << 'EOF'
 [CSR-RUNNER]
 
 Executes systems and unit tests for critical system reconciliation.
@@ -23,8 +23,8 @@ Usage:
   csr-runner [flags] [args]
 EOF
 
-if [[ $# < 6 ]]; then echo "${USAGE}"; fi
-while getopts ":e:s:u" args
+if [[ $# -lt 6 ]]; then echo "${USAGE}"; fi
+while getopts ":e:s:u:*" args
 do
   case $args in
     e)  
@@ -36,13 +36,16 @@ do
     u)
       u=$6
       ;;
+    *)
+      echo "${USAGE}"
+      ;;
   esac
 done
 
-if [[ ! -z $e ]] && \
-   [[ ! -z $s ]] && \
-   [[ ! -z $u ]]; then 
-  echo -e "${M}#${N} Executing test in environment ${G}$e${N} for system ${B}$s${N} unit ${B}$u${N} test:\n" ; ${PWD}/$e/$s/unit/tests $u
+if [[ -n ${e} ]] && \
+   [[ -n ${s} ]] && \
+   [[ -n ${u} ]]; then 
+  echo -e "${M}#${N} Executing test in environment ${G}${e}${N} for system ${B}${s}${N} unit ${B}${u}${N} test:\n" ; "${PWD}"/"${e}"/"${s}"/unit/tests "${u}"
   exit
 fi
 
