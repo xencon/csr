@@ -1,6 +1,6 @@
 # Critical Systems Reconciliation
 
-The puposes of CSR is to provide reconcilistion of the systems runtime 
+The pupose of CSR is to provide reconcilistion of the systems runtime 
 configuration and associated resources. This is tested against an agreed
 specification and known state of the system in question. This repository 
 contains unit tests for the components which assemble these critical systems 
